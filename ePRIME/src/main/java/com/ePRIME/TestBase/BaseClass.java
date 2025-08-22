@@ -4,32 +4,35 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import com.ePRIME.Reader.PropertyReader;
 
 public class BaseClass {
-
 	
-	static WebDriver driver;
+	private static ThreadLocal<WebDriver> driver=new ThreadLocal<WebDriver>();
 	
-	public static void createDriver(String browserName)
+	public static void setDriver(String browserName)
 	{
+		
 		if(browserName.equalsIgnoreCase("chrome"))
 		{
 			System.setProperty(PropertyReader.getProperty("chromeKey"),PropertyReader.getProperty("chromeValue") );
-			driver=new ChromeDriver();
+			driver.set(new ChromeDriver());
 		}
 		
 		else if(browserName.equalsIgnoreCase("edge"))
 		{
 			System.setProperty(PropertyReader.getProperty("edgeKey"),PropertyReader.getProperty("edgeValue") );
-			driver=new EdgeDriver();
+			driver.set(new EdgeDriver());
 		}
 		
 		else if(browserName.equalsIgnoreCase("firefox"))
 		{
 			System.setProperty(PropertyReader.getProperty("firefoxKey"),PropertyReader.getProperty("firefoxValue") );
-			driver=new FirefoxDriver();
+			FirefoxOptions options = new FirefoxOptions();
+			options.addArguments("--allow-system-access");
+			driver.set(new FirefoxDriver(options));
 		}
 		
 		else {
@@ -37,6 +40,12 @@ public class BaseClass {
 		    System.err.println(errorMessage);
 		    throw new IllegalArgumentException(errorMessage);
 		}
+	}
+
+	
+	public static WebDriver getDriver()
+	{
+		return driver.get();
 
 	}
 	

@@ -5,7 +5,8 @@
     <classes>
       <class name="com.ePRIME.TestScripts.SampleRun">
         <methods>
-          <include name="testRun"/>
+          <include name="verifyLogin"/>
+          <include name="setup"/>
         </methods>
       </class> <!-- com.ePRIME.TestScripts.SampleRun -->
     </classes>
