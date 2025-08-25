@@ -1,6 +1,7 @@
 package com.ePRIME.TestScripts;
 
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -8,7 +9,9 @@ import org.testng.annotations.Test;
 import com.ePRIME.PageObjects.LoginPage;
 import com.ePRIME.TestBase.BaseClass;
 import com.ePRIME.TestUtility.DriverUtility;
+import com.ePRIME.TestUtility.ListenersUtility;
 
+@Listeners(ListenersUtility.class)
 public class SampleRun extends BaseClass{
 	
 	LoginPage loginPage;

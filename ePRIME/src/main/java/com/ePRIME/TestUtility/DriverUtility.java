@@ -1,12 +1,18 @@
 package com.ePRIME.TestUtility;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.ePRIME.Reader.PropertyReader;
 import com.ePRIME.TestBase.BaseClass;
 
 public class DriverUtility extends BaseClass{
@@ -84,5 +90,26 @@ public class DriverUtility extends BaseClass{
 	public static void dropdownByVisibleText(WebElement element, String visibleText) {
 		Select select = new Select(element);
 		select.selectByVisibleText(visibleText);
+	}
+	
+	public static String captureScreenshot(String fileName)
+	{
+		long timeMillis = System.currentTimeMillis();
+		String path=PropertyReader.getProperty("screenshotPath")+fileName+timeMillis+PropertyReader.getProperty("PNG");
+		TakesScreenshot screen=(TakesScreenshot)getDriver();
+		File screenshotAs = screen.getScreenshotAs(OutputType.FILE);
+		File screenshotTo=new File(path);
+		
+		try {
+		FileHandler.copy(screenshotAs, screenshotTo);
+		
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return screenshotTo.getAbsolutePath();
+		
 	}
 }

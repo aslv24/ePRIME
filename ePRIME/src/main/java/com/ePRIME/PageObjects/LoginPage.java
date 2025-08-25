@@ -22,7 +22,7 @@ public class LoginPage extends BaseClass{
 	@FindBy(xpath = "//input[@name='password']")
 	private WebElement passwordField;
 	
-	@FindBy(xpath = "//button[@type='submit']")
+	@FindBy(xpath = "//button[@type='subm']")
 	private WebElement loginButton;
 	
 	public void verifyLogin(int index,String emailId,String password)
