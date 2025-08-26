@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import com.ePRIME.PageObjects.LoginPage;
 import com.ePRIME.TestBase.BaseClass;
+import com.ePRIME.TestUtility.DataProviderClass;
 import com.ePRIME.TestUtility.DriverUtility;
 import com.ePRIME.TestUtility.ListenersUtility;
 
@@ -43,9 +44,9 @@ public class SampleRun extends BaseClass{
 	}
 	
 	
-	@Test(priority = 3)
-	public void verifyLogin()
+	@Test(priority = 3,dataProvider = "qaData",dataProviderClass = DataProviderClass.class)
+	public void verifyLogin(String role, String emailId, String password)
 	{
-		loginPage.verifyLogin(1, "admin@mail.com", "12345678");
+		loginPage.verifyLogin(role, emailId, password);
 	}
 }

@@ -22,23 +22,41 @@ public class LoginPage extends BaseClass{
 	@FindBy(xpath = "//input[@name='password']")
 	private WebElement passwordField;
 	
-	@FindBy(xpath = "//button[@type='subm']")
+	@FindBy(xpath = "//button[@type='submit']")
 	private WebElement loginButton;
 	
-	public void verifyLogin(int index,String emailId,String password)
+	@FindBy(xpath = "//a[@class='dropdown-toggle'][normalize-space(text())='Account']")
+	private WebElement accountDropdown;
+	
+	@FindBy(xpath = "//span[text()='Logout']")
+	private WebElement logoutButton;
+	
+	
+	public void verifyLogin(String value,String emailId,String password)
 	{
-		selectRoleDropdown(index);
+		selectRoleDropdown(value);
 		
 		enterEmailField(emailId);
 		
 		enterPasswordField(password);
 		
 		clickLoginButton();
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		clickAccountDropdown();
+		
+		clickLogoutButton();
 	}
 	
-	public void selectRoleDropdown(int index)
+	public void selectRoleDropdown(String value)
 	{
-		DriverUtility.dropdownByIndex(roleDropdown, index);
+		DriverUtility.dropdownByVisibleText(roleDropdown, value);
 	}
 	
 	public void enterEmailField(String emailId)
@@ -54,5 +72,15 @@ public class LoginPage extends BaseClass{
 	public void clickLoginButton()
 	{
 		DriverUtility.clickElement(loginButton);
+	}
+	
+	public void clickAccountDropdown()
+	{
+		DriverUtility.clickElement(accountDropdown);
+	}
+	
+	public void clickLogoutButton()
+	{
+		DriverUtility.clickElement(logoutButton);
 	}
 }
