@@ -5,7 +5,8 @@
     <classes>
       <class name="com.ePRIME.TestScripts.SampleRun">
         <methods>
-          <include name="verifyLogin" invocation-numbers="3 4 5 6"/>
+          <include name="verifyTitle"/>
+          <include name="verifyUrl"/>
           <include name="setup"/>
         </methods>
       </class> <!-- com.ePRIME.TestScripts.SampleRun -->
